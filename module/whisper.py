@@ -4,7 +4,6 @@ import torchaudio
 from transformers import pipeline, WhisperProcessor, WhisperForConditionalGeneration
 import numpy as np
 from glob import glob
-from whisper import WhisperTimeStampLogitsProcessor
 
 def load_model(model_id, cache_dir):
     """
@@ -112,7 +111,6 @@ def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_
         list: Refined timestamps.
     """
     pipe = load_model(model_id, cache_dir)
-    timestamp_processor = WhisperTimeStampLogitsProcessor()
     refined_timestamps = []
 
     for start, end in timestamps:
@@ -121,7 +119,7 @@ def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_
 
         while len(segment) / samplerate >= 30 or savetime == 0:
             chunk = segment[:30 * samplerate]
-            result = pipe(chunk, generate_kwargs={"num_beams": 1, "temperature": 0.0, "return_timestamps": True, "task": "transcribe", "logits_processor": [timestamp_processor]})
+            result = pipe(chunk, generate_kwargs={"num_beams": 1, "temperature": 0.0, "return_timestamps": True, "task": "transcribe"})
             if not result['chunks']:
                 break
 
@@ -152,8 +150,7 @@ def transcribe_audio(timestamps, waveform, cache_dir, samplerate=16000, lang="en
         list: Transcribed text.
     """
     pipe = load_model(model_id, cache_dir)
-    timestamp_processor = WhisperTimeStampLogitsProcessor()
-    return [pipe(waveform[int(start * samplerate):int(end * samplerate)], generate_kwargs={"num_beams": 1, "temperature": 0.0, "return_timestamps": True, "task": "transcribe", "language": lang, "logits_processor": [timestamp_processor]})['text'] for start, end in timestamps]
+    return [pipe(waveform[int(start * samplerate):int(end * samplerate)], generate_kwargs={"num_beams": 1, "temperature": 0.0, "return_timestamps": True, "task": "transcribe", "language": lang})['text'] for start, end in timestamps]
 
 def save_slices(info, wav_output_dir, txt_output_dir):
     """
