@@ -3,6 +3,9 @@ FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel
 # Set working directory
 WORKDIR /workspace
 
+# Change Ubuntu mirror to a reliable one (Cloudflare mirror)
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.cloud.tencent.com/ubuntu|g' /etc/apt/sources.list
+
 # Force update & fix hash sum mismatch
 RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
@@ -30,7 +33,7 @@ RUN pip install --upgrade pip && \
 
 # Create necessary directories
 RUN mkdir -p data/audio_mp3 data/audio_wav data/result data/transcribe data/video \
-    module/model/redimmet module/model/whisper
+    module/model/MSST_WebUI module/model/redimmet module/model/whisper
 
 # Set environment variables if needed (modify according to your project requirements)
 ENV PYTHONUNBUFFERED=1
