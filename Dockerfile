@@ -4,7 +4,7 @@ FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel
 WORKDIR /workspace
 
 # Install dependencies
-RUN apt-get update && apt-get install -y --fix-missing \
+RUN rm -rf /var/lib/apt/lists/* && apt-get update --allow-releaseinfo-change && apt-get install -y --fix-missing \
     git \
     curl \
     wget \
