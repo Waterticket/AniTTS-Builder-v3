@@ -3,10 +3,11 @@ FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel
 # Set working directory
 WORKDIR /workspace
 
-# Remove old APT cache and force update
+# Force update & fix hash sum mismatch
 RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
     apt-get update --allow-releaseinfo-change --fix-missing && \
+    apt-get update --fix-missing && \
     apt-get install -y \
     git \
     curl \
