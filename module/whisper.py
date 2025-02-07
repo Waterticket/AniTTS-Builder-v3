@@ -124,7 +124,7 @@ def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_
                 break
 
             for i in result['chunks']:
-                if i['timestamp'] and i['timestamp'][0] < i['timestamp'][1] < 30:
+                if i['timestamp'] and i['timestamp'][0] is not None and i['timestamp'][1] is not None and i['timestamp'][0] < i['timestamp'][1] < 30:
                     temp_timestamps.append((i['timestamp'][0] + savetime, i['timestamp'][1] + savetime))
                     savetime = i['timestamp'][1]
 
