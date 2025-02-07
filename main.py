@@ -75,4 +75,4 @@ with gr.Blocks() as demo:
         .then(clustering_for_main, inputs=[wav_folder, result_folder, embeddings_cache_dir], outputs=[]) \
         .then(lambda: enable_all(), outputs=all_buttons + [button_state])
 
-demo.launch()
+demo.launch(server_name="0.0.0.0", server_port=7860)
