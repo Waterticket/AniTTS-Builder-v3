@@ -4,12 +4,11 @@ FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel
 WORKDIR /workspace
 
 # Change Ubuntu mirror to a reliable one (Cloudflare mirror)
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.cloud.tencent.com/ubuntu|g' /etc/apt/sources.list
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirror.kakao.com/ubuntu|g' /etc/apt/sources.list
 
-# Force update & fix hash sum mismatch
-RUN rm -rf /var/lib/apt/lists/* && \
-    apt-get clean && \
-    apt-get update --allow-releaseinfo-change --fix-missing && \
+# Install dependencies with cache cleanup
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
     apt-get update --fix-missing && \
     apt-get install -y \
     git \
