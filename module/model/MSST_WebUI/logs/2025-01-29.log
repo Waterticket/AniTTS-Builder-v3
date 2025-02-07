@@ -1,0 +1,260 @@
+20:20:39.485 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:20:39.486 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:20:39.486 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.5.1+cpu
+20:20:39.514 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:20:39.514 [INFO] [inference\msst_infer.py:72] Using device: cpu, device_ids: [0]
+20:20:40.819 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:20:40.834 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:20:40.834 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:20:40.834 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:20:41.471 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.96 seconds
+20:20:41.485 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+20:20:41.740 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:20:41.741 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:25:14.920 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:25:14.921 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:25:14.921 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:25:14.947 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:25:14.948 [INFO] [inference\msst_infer.py:72] Using device: cpu, device_ids: [0]
+20:25:16.240 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:25:16.240 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:25:16.240 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:25:16.241 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:25:16.576 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.63 seconds
+20:25:16.578 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+20:25:16.830 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:25:16.830 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:25:49.846 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:25:49.846 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:25:49.846 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:25:49.871 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:25:49.871 [INFO] [inference\msst_infer.py:72] Using device: cpu, device_ids: [1]
+20:25:51.118 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:25:51.119 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:25:51.119 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:25:51.119 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:25:51.440 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.57 seconds
+20:25:51.441 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+20:25:51.695 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:25:51.695 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:26:17.641 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:26:17.641 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:26:17.642 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:26:17.681 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:26:17.682 [DEBUG] [inference\msst_infer.py:69] No hardware acceleration could be configured, running in CPU mode
+20:26:17.682 [INFO] [inference\msst_infer.py:72] Using device: cuda, device_ids: [1]
+20:26:18.932 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:26:18.932 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:26:18.932 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:26:18.932 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:31:23.319 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:31:23.319 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:31:23.319 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:31:23.344 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:31:23.364 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+20:31:23.364 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+20:31:24.815 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:31:24.815 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:31:24.815 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:31:24.816 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:31:25.456 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 2.09 seconds
+20:31:25.457 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+20:31:25.705 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:31:25.705 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:31:44.516 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:31:44.528 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:31:44.528 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:31:44.542 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:31:44.552 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+20:31:44.682 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+20:31:44.795 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+20:31:44.804 [DEBUG] [inference\msst_infer.py:274] Running garbage collection...
+20:31:44.875 [DEBUG] [inference\msst_infer.py:280] Clearing CUDA cache...
+20:43:56.722 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:43:56.722 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:43:56.723 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:43:56.761 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:43:56.783 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+20:43:56.783 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+20:43:58.094 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:43:58.094 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:43:58.094 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:43:58.094 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:43:58.723 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.94 seconds
+20:43:58.725 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 3
+20:43:58.950 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:43:58.951 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:44:17.558 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:44:17.569 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:44:17.569 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:44:17.582 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:44:17.587 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+20:44:17.718 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+20:44:17.814 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+20:44:17.834 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test_other.wav
+20:44:17.835 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:44:36.007 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:44:36.019 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:44:36.019 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:44:36.030 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:44:36.043 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test_other.wav completed. Starting to save results.
+20:44:36.161 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_other_vocals.wav in C:\Users\user\Downloads\test
+20:44:36.273 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other_other.wav in C:\Users\user\Downloads\test
+20:44:36.294 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test_vocals.wav
+20:44:36.294 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:44:54.495 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:44:54.506 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:44:54.506 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:44:54.518 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:44:54.530 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test_vocals.wav completed. Starting to save results.
+20:44:54.680 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals_vocals.wav in C:\Users\user\Downloads\test
+20:44:54.780 [DEBUG] [inference\msst_infer.py:168] Saved other for test_vocals_other.wav in C:\Users\user\Downloads\test
+20:44:54.786 [DEBUG] [inference\msst_infer.py:274] Running garbage collection...
+20:44:54.857 [DEBUG] [inference\msst_infer.py:280] Clearing CUDA cache...
+20:45:16.503 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:45:16.503 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:45:16.503 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:45:16.527 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:45:16.546 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+20:45:16.546 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+20:45:17.815 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:45:17.816 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:45:17.816 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:45:17.816 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:45:18.432 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.89 seconds
+20:45:18.433 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+20:45:18.670 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:45:18.670 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:45:37.177 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:45:37.190 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:45:37.190 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:45:37.202 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:45:37.207 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+20:45:37.337 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+20:45:37.448 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+20:45:37.455 [DEBUG] [inference\msst_infer.py:274] Running garbage collection...
+20:45:37.512 [DEBUG] [inference\msst_infer.py:280] Clearing CUDA cache...
+20:46:53.530 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:46:53.531 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:46:53.531 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:46:53.555 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:46:53.575 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+20:46:53.575 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+20:46:54.859 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:46:54.859 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:46:54.860 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:46:54.860 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:46:55.507 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.93 seconds
+20:46:55.509 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 3
+20:46:55.748 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:46:55.748 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:47:14.233 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:47:14.243 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:47:14.244 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:47:14.256 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:47:14.262 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+20:47:14.397 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+20:47:14.504 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+20:47:14.524 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test_other.wav
+20:47:14.525 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:47:29.880 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:47:29.881 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:47:29.881 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:47:29.905 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:47:29.936 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+20:47:29.936 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+20:47:31.221 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:47:31.221 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:47:31.222 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:47:31.222 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:47:31.856 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.92 seconds
+20:47:31.857 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+20:47:32.095 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:47:32.096 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:47:50.658 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:47:50.668 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:47:50.668 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:47:50.680 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:47:50.686 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+20:47:50.821 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+20:47:50.945 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+20:47:50.952 [DEBUG] [inference\msst_infer.py:274] Running garbage collection...
+20:47:51.012 [DEBUG] [inference\msst_infer.py:280] Clearing CUDA cache...
+20:55:34.245 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:55:34.245 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:55:34.246 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:55:34.270 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:55:34.290 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+20:55:34.291 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+20:55:35.673 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:55:35.673 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:55:35.674 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:55:35.674 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:55:36.370 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 2.08 seconds
+20:55:36.372 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 2
+20:55:36.451 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:55:36.451 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:55:55.864 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:55:55.876 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:55:55.877 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:55:55.890 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:55:55.900 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+20:55:56.053 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+20:55:56.167 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+20:55:56.191 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test_other.wav
+20:55:56.191 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:56:15.277 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:56:15.290 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:56:15.291 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:56:15.304 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:56:15.314 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test_other.wav completed. Starting to save results.
+20:56:15.435 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_other_vocals.wav in C:\Users\user\Downloads\test
+20:56:15.565 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other_other.wav in C:\Users\user\Downloads\test
+20:56:15.572 [DEBUG] [inference\msst_infer.py:274] Running garbage collection...
+20:56:15.645 [DEBUG] [inference\msst_infer.py:280] Clearing CUDA cache...
+20:59:01.522 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+20:59:01.523 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+20:59:01.523 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+20:59:01.546 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+20:59:01.568 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+20:59:01.569 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+20:59:02.848 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+20:59:02.848 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+20:59:02.849 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+20:59:02.849 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+20:59:03.478 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 1.91 seconds
+20:59:03.479 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+20:59:03.554 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+20:59:03.554 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+20:59:22.058 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+20:59:22.069 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+20:59:22.069 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+20:59:22.080 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+20:59:22.090 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+20:59:22.241 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+20:59:22.339 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+20:59:22.347 [DEBUG] [inference\msst_infer.py:274] Running garbage collection...
+20:59:22.415 [DEBUG] [inference\msst_infer.py:280] Clearing CUDA cache...
+22:00:41.059 [DEBUG] [inference\msst_infer.py:88] Operating System: Windows 10.0.26100
+22:00:41.060 [DEBUG] [inference\msst_infer.py:91] Python Version: 3.10.16
+22:00:41.060 [DEBUG] [inference\msst_infer.py:94] PyTorch Version: 2.4.1
+22:00:41.086 [DEBUG] [inference\msst_infer.py:100] FFmpeg installed: ffmpeg version 2024-07-24-git-896c22ef00-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+22:00:41.105 [DEBUG] [inference\msst_infer.py:63] CUDA is available in Torch, setting Torch device to CUDA
+22:00:41.106 [INFO] [inference\msst_infer.py:72] Using device: cuda:0, device_ids: [0]
+22:00:42.521 [INFO] [inference\msst_infer.py:108] Separator params: model_type: mel_band_roformer, model_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\pretrain\vocal_models\Kim_MelBandRoformer.ckpt, config_path: c:\Users\user\Documents\AniTTS-Builder-v3\module\model\MSST_WebUI\configs_backup\vocal_models\config_Kim_MelBandRoformer.yaml
+22:00:42.522 [INFO] [inference\msst_infer.py:109] Separator params: output_folder: C:\Users\user\Downloads\test, output_format: wav
+22:00:42.522 [INFO] [inference\msst_infer.py:110] Model params: instruments: ['vocals', 'other'], target_instrument: vocals
+22:00:42.522 [DEBUG] [inference\msst_infer.py:111] Model params: batch_size: 1, num_overlap: 4, dim_t: 256, normalize: None, use_tta: False
+22:00:43.221 [DEBUG] [inference\msst_infer.py:125] Loading model completed, duration: 2.11 seconds
+22:00:43.223 [INFO] [inference\msst_infer.py:134] Input_folder: C:\Users\user\Downloads\test, Total files found: 1
+22:00:43.299 [DEBUG] [inference\msst_infer.py:157] Starting separation process for audio_file: C:\Users\user\Downloads\test\test.mp3
+22:00:43.299 [DEBUG] [inference\msst_infer.py:182] Target instrument is not null, set primary_stem to target_instrument, secondary_stem will be calculated by mix - target_instrument
+22:01:02.636 [DEBUG] [inference\msst_infer.py:203] Finished demixing tracks.
+22:01:02.647 [DEBUG] [inference\msst_infer.py:219] Starting to extract waveforms for instruments: ['vocals']
+22:01:02.647 [DEBUG] [inference\msst_infer.py:233] target_instrument is not null, extracting instrumental from vocals, other_instruments: ['other']
+22:01:02.660 [DEBUG] [inference\msst_infer.py:245] Separation process completed.
+22:01:02.673 [DEBUG] [inference\msst_infer.py:159] Separation audio_file: C:\Users\user\Downloads\test\test.mp3 completed. Starting to save results.
+22:01:02.810 [DEBUG] [inference\msst_infer.py:168] Saved vocals for test_vocals.wav in C:\Users\user\Downloads\test
+22:01:02.915 [DEBUG] [inference\msst_infer.py:168] Saved other for test_other.wav in C:\Users\user\Downloads\test
+22:01:02.925 [DEBUG] [inference\msst_infer.py:274] Running garbage collection...
+22:01:02.998 [DEBUG] [inference\msst_infer.py:280] Clearing CUDA cache...
