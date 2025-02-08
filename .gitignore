@@ -17,3 +17,6 @@
 *.mpg
 *.mkv
 *.wmv
+__pycache__/
+*.pyc
+*.pyo
