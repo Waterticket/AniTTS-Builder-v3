@@ -172,5 +172,6 @@ watchfiles==1.0.4
 websockets==11.0.3
 wheel==0.45.1
 win_inet_pton==1.1.0
+whisperx
 yarl==1.18.3
 zstandard==0.23.0
