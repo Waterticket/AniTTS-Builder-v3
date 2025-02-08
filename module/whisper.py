@@ -83,6 +83,7 @@ def audio_normalize(audio):
 def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_id="waveletdeboshir/whisper-large-v3-no-numbers"):
     """
     Extract precise timestamps from non-silent audio segments.
+    If a segment requires more than 10 chunks to process, skip that segment.
     """
     print("[INFO] Extracting precise timestamps from non-silent segments.")
     pipe = load_model(model_id, cache_dir)
@@ -96,6 +97,10 @@ def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_
 
         while len(segment) / samplerate >= 30 or savetime == 0:
             chunk_count += 1
+            if chunk_count > 30:
+                print(f"[WARN] Segment {segment_index+1} exceeded 30 chunks; skipping this segment.")
+                temp_timestamps = []  # Discard partial results
+                break
             print(f"[INFO] Processing chunk {chunk_count} of segment {segment_index+1}.")
             chunk = segment[:30 * samplerate]
             result = pipe(chunk, generate_kwargs={
@@ -114,6 +119,11 @@ def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_
                     savetime = i['timestamp'][1]
 
             segment = segment[int(savetime * samplerate):]
+
+        if chunk_count > 10:
+            # Skip adding timestamps for this segment if chunk limit exceeded
+            print(f"[INFO] Skipping segment {segment_index+1} due to excessive chunk count.")
+            continue
 
         print(f"[INFO] Extracted {len(temp_timestamps)} timestamps from segment {segment_index+1}.")
         refined_timestamps += [(start + ts[0], start + ts[1]) for ts in temp_timestamps]
