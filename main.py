@@ -4,6 +4,8 @@ from module.msst import msst_for_main
 from module.clustering import clustering_for_main
 import os
 import gradio as gr
+import warnings
+warnings.filterwarnings("ignore")
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 

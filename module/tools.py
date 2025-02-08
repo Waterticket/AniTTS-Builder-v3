@@ -16,18 +16,18 @@ def convert_to_wav(input_file, output_wav):
         ext = os.path.splitext(input_file)[1].lower()
         
         if ext in [".mp4", ".mkv", ".avi", ".mov", ".flv", ".webm", ".mp3", ".aac", ".flac", ".ogg", ".m4a", ".wav"]:
-            print(f"Processing: {input_file} -> {output_wav}")
+            print(f"[INFO] Converting: {input_file} -> {output_wav}")
             (
                 ffmpeg
                 .input(input_file)
                 .output(output_wav, format="wav", acodec="pcm_s16le", ac=1)
                 .run(overwrite_output=True)
             )
-            print(f"Conversion completed: {output_wav}")
+            print(f"[INFO] Conversion completed: {output_wav}")
         else:
-            print(f"Unsupported file format: {ext}")
+            print(f"[WARN] Unsupported file format: {ext}")
     except ffmpeg.Error as e:
-        print(f"Error: {e.stderr.decode()}")
+        print(f"[ERROR] FFmpeg conversion error: {e.stderr.decode()}")
 
 def batch_convert_to_wav(input_folder, output_folder):
     """
@@ -37,14 +37,20 @@ def batch_convert_to_wav(input_folder, output_folder):
         input_folder (str): Path to the folder containing input files.
         output_folder (str): Path to save the converted WAV files.
     """
+    print(f"[INFO] Starting batch conversion to WAV.")
+    print(f"[INFO] Input folder: {input_folder}")
+    print(f"[INFO] Output folder: {output_folder}")
     os.makedirs(output_folder, exist_ok=True)
     supported_extensions = (".mp4", ".mkv", ".avi", ".mov", ".flv", ".webm", ".mp3", ".aac", ".flac", ".ogg", ".m4a", ".wav")
     
+    files_converted = 0
     for file_name in os.listdir(input_folder):
         input_path = os.path.join(input_folder, file_name)
         if os.path.isfile(input_path) and file_name.lower().endswith(supported_extensions):
             output_path = os.path.join(output_folder, os.path.splitext(file_name)[0] + ".wav")
             convert_to_wav(input_path, output_path)
+            files_converted += 1
+    print(f"[INFO] Batch conversion to WAV completed. Total files converted: {files_converted}")
 
 def convert_wav_to_mp3(input_wav, output_mp3):
     """
@@ -55,16 +61,17 @@ def convert_wav_to_mp3(input_wav, output_mp3):
         output_mp3 (str): Path to save the output MP3 file.
     """
     try:
+        print(f"[INFO] Converting WAV to MP3: {input_wav} -> {output_mp3}")
         (
             ffmpeg
             .input(input_wav)
             .output(output_mp3, format='mp3', acodec='libmp3lame', ar='16000', ac=1)
             .run(overwrite_output=True)
         )
-        print(f"Converted to MP3: {output_mp3}")
+        print(f"[INFO] Conversion to MP3 completed: {output_mp3}")
     except ffmpeg.Error as e:
         error_message = e.stderr.decode() if e.stderr else "Unknown error"
-        print(f"FFmpeg Error: {error_message}")
+        print(f"[ERROR] FFmpeg error during WAV to MP3 conversion: {error_message}")
 
 def batch_convert_wav_to_mp3(input_folder, output_folder):
     """
@@ -74,13 +81,19 @@ def batch_convert_wav_to_mp3(input_folder, output_folder):
         input_folder (str): Path to the folder containing WAV files.
         output_folder (str): Path to save the converted MP3 files.
     """
+    print(f"[INFO] Starting batch conversion from WAV to MP3.")
+    print(f"[INFO] Input folder: {input_folder}")
+    print(f"[INFO] Output folder: {output_folder}")
     os.makedirs(output_folder, exist_ok=True)
     
+    files_converted = 0
     for file_name in os.listdir(input_folder):
         input_path = os.path.join(input_folder, file_name)
         if os.path.isfile(input_path) and file_name.lower().endswith(".wav"):
             output_path = os.path.join(output_folder, os.path.splitext(file_name)[0] + ".mp3")
             convert_wav_to_mp3(input_path, output_path)
+            files_converted += 1
+    print(f"[INFO] Batch conversion from WAV to MP3 completed. Total files converted: {files_converted}")
 
 def download_file(url, save_path):
     """
@@ -91,9 +104,10 @@ def download_file(url, save_path):
         save_path (str): Path to save the downloaded file.
     """
     if os.path.exists(save_path):
-        print(f"File already exists: {save_path}")
+        print(f"[INFO] File already exists: {save_path}")
         return
     
+    print(f"[INFO] Starting download from: {url}")
     headers = {"User-Agent": "Mozilla/5.0"}
     response = requests.get(url, headers=headers, stream=True)
     response.raise_for_status()
@@ -108,12 +122,13 @@ def download_file(url, save_path):
             file.write(chunk)
             bar.update(len(chunk))
     
-    print(f"Downloaded: {save_path}")
+    print(f"[INFO] Download completed: {save_path}")
 
 def download_pretrained_models():
     """
     Download necessary pretrained models from Hugging Face.
     """
+    print("[INFO] Starting download of pretrained models.")
     model_urls = {
         "vocal_models/Kim_MelBandRoformer.ckpt": "https://huggingface.co/Sucial/MSST-WebUI/resolve/main/All_Models/vocal_models/Kim_MelBandRoformer.ckpt",
         "vocal_models/model_mel_band_roformer_karaoke_aufr33_viperx_sdr_10.1956.ckpt": "https://huggingface.co/Sucial/MSST-WebUI/resolve/main/All_Models/vocal_models/model_mel_band_roformer_karaoke_aufr33_viperx_sdr_10.1956.ckpt",
@@ -124,6 +139,7 @@ def download_pretrained_models():
     for filename, url in model_urls.items():
         save_path = os.path.join("./module/model/MSST_WebUI/pretrain/", filename)
         download_file(url, save_path)
+    print("[INFO] All pretrained models have been downloaded.")
 
 def move_matching_text_files(folder1, folder2):
     """
@@ -134,6 +150,7 @@ def move_matching_text_files(folder1, folder2):
         folder1 (str): Path to the folder containing text files.
         folder2 (str): Path to the main folder containing subfolders with WAV files.
     """
+    print(f"[INFO] Starting to move matching text files from '{folder1}' to corresponding subfolders in '{folder2}'.")
     # Get all text file names in folder1 (without extension)
     text_files = {os.path.splitext(f)[0]: os.path.join(folder1, f) for f in os.listdir(folder1) if f.endswith(".txt")}
     
@@ -152,11 +169,12 @@ def move_matching_text_files(folder1, folder2):
                     # Move text file
                     shutil.move(text_file_path, target_path)
                     moved_files.add(wav_name)
-                    print(f"Moved: {text_file_path} -> {target_path}")
+                    print(f"[INFO] Moved text file: {text_file_path} -> {target_path}")
 
     # Remove remaining text files in folder1
     remaining_files = set(text_files.keys()) - moved_files
     for file_name in remaining_files:
         file_path = text_files[file_name]
         os.remove(file_path)
-        print(f"Deleted: {file_path}")
+        print(f"[INFO] Deleted remaining text file: {file_path}")
+    print("[INFO] Completed moving matching text files.")

@@ -10,11 +10,16 @@ def load_separator(model, model_type, folder_path):
     """
     Initialize MSSeparator with specified model and parameters.
     """
+    print(f"[INFO] Initializing MSSeparator with model type '{model_type}' for folder '{folder_path}'.")
     logger = get_logger()
-    return MSSeparator(
+    config_path = os.path.abspath(f"{os.path.dirname(os.path.abspath(__file__))}/model/MSST_WebUI/configs_backup/{model[0]}")
+    model_path = os.path.abspath(f"{os.path.dirname(os.path.abspath(__file__))}/model/MSST_WebUI/pretrain/{model[1]}")
+    print(f"[INFO] Using config: {config_path}")
+    print(f"[INFO] Using model checkpoint: {model_path}")
+    separator = MSSeparator(
         model_type=model_type,
-        config_path=os.path.abspath(f"{os.path.dirname(os.path.abspath(__file__))}/model/MSST_WebUI/configs_backup/{model[0]}"),
-        model_path=os.path.abspath(f"{os.path.dirname(os.path.abspath(__file__))}/model/MSST_WebUI/pretrain/{model[1]}"),
+        config_path=config_path,
+        model_path=model_path,
         device='auto',
         device_ids=[0],
         output_format='wav',
@@ -23,29 +28,40 @@ def load_separator(model, model_type, folder_path):
         logger=logger,
         debug=True
     )
+    print("[INFO] MSSeparator initialized successfully.")
+    return separator
 
 def process_msst(model, model_type, folder_path, stem):
     """
     Process audio files using the MSSeparator model.
     """
+    print(f"[INFO] Starting processing with stem '{stem}' in folder '{folder_path}'.")
     separator = load_separator(model, model_type, folder_path)
+    print("[INFO] Processing folder using MSSeparator.")
     inputs_list = separator.process_folder(folder_path)
+    print(f"[INFO] Processing complete. {len(inputs_list)} files processed.")
     separator.del_cache()
+    print("[INFO] Cache cleared after processing.")
 
     results_list = [[f"{folder_path}/{i[:-4]}_{stem}.wav", f"{folder_path}/{i}"] for i in inputs_list]
     for old, new in results_list:
+        print(f"[INFO] Replacing file: {new} with {old}.")
         os.remove(new)
         os.rename(old, new)
 
+    # Remove files not in inputs_list
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
         if os.path.isfile(file_path) and filename not in inputs_list:
+            print(f"[INFO] Removing extra file: {filename}.")
             os.remove(file_path)
+    print(f"[INFO] Processing with stem '{stem}' completed.")
 
 def msst_for_main(folder_path):
     """
     Apply MSSeparator with multiple models for different audio processing tasks.
     """
+    print(f"[INFO] Starting MSST processing for folder: {folder_path}.")
     models = [
         (["vocal_models/config_Kim_MelBandRoformer.yaml", "vocal_models/Kim_MelBandRoformer.ckpt"], 'vocals'),
         (["vocal_models/config_mel_band_roformer_karaoke.yaml", "vocal_models/model_mel_band_roformer_karaoke_aufr33_viperx_sdr_10.1956.ckpt"], 'karaoke'),
@@ -55,4 +71,7 @@ def msst_for_main(folder_path):
     model_type = "mel_band_roformer"
     
     for model, stem in models:
+        print(f"[INFO] Processing model for stem '{stem}'.")
         process_msst(model, model_type, folder_path, stem)
+        print(f"[INFO] Completed processing for stem '{stem}'.")
+    print("[INFO] All MSST processing tasks completed.")
