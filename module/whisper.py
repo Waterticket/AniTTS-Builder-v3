@@ -1,40 +1,54 @@
 import os
 import torch
 import torchaudio
+from transformers import pipeline, WhisperProcessor, WhisperForConditionalGeneration
 import numpy as np
 from glob import glob
-import whisperx
 
-def load_model(model_id, cache_dir=None):
+def load_model(model_id, cache_dir):
     """
-    Load the model using whisperx.
+    Load the Whisper ASR model with given model ID and cache directory.
 
     Args:
-        model_id (str): Whisper model identifier (e.g., "large", "medium", etc.).
-        cache_dir (str, optional): Cache directory (not used in whisperx, kept for compatibility).
+        model_id (str): Hugging Face model ID.
+        cache_dir (str): Directory to cache the model.
 
     Returns:
-        Model: Loaded whisperx model.
+        pipeline: ASR pipeline for transcription.
     """
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    compute_type = "float16" if device == "cuda" else "float32"
-    model = whisperx.load_model(model_id, device, compute_type=compute_type)
-    return model
+    torch_dtype = torch.float16
+
+    processor = WhisperProcessor.from_pretrained(model_id, torch_dtype=torch_dtype, cache_dir=cache_dir)
+    model = WhisperForConditionalGeneration.from_pretrained(model_id, torch_dtype=torch_dtype, cache_dir=cache_dir).to(device)
+
+    pipe = pipeline(
+        "automatic-speech-recognition",
+        model=model,
+        tokenizer=processor.tokenizer,
+        feature_extractor=processor.feature_extractor,
+        return_timestamps=True,
+        torch_dtype=torch_dtype,
+        device=device,
+        return_language=True
+    )
+
+    return pipe
 
 def detect_non_silent(audio, sr=16000, silence_db=-40, min_silence_len_sec=1, min_gap_sec=1, min_duration_sec=0.05):
     """
-    Detect non-silent segments in an audio waveform and merge segments separated by short silences.
+    Detect non-silent segments in an audio array and merge short pauses.
 
     Args:
         audio (np.ndarray): Mono audio waveform.
         sr (int): Sample rate.
-        silence_db (float): Decibel threshold to consider as silence.
+        silence_db (float): Threshold for silence detection.
         min_silence_len_sec (float): Minimum duration to consider as silence.
-        min_gap_sec (float): Maximum gap between non-silent segments to merge them.
-        min_duration_sec (float): Minimum duration for a valid non-silent segment.
+        min_gap_sec (float): Minimum gap between non-silent segments for merging.
+        min_duration_sec (float): Minimum duration of final non-silent segments.
 
     Returns:
-        List[Tuple[float, float]]: List of (start_time, end_time) tuples for non-silent segments.
+        List[Tuple[float, float]]: List of (start_time, end_time) for non-silent segments.
     """
     if len(audio) == 0:
         return []
@@ -66,85 +80,97 @@ def detect_non_silent(audio, sr=16000, silence_db=-40, min_silence_len_sec=1, mi
 
 def audio_normalize(audio):
     """
-    Normalize an audio waveform to -20 dB RMS.
+    Normalize an audio waveform to -20dB RMS.
 
     Args:
-        audio (tuple): Tuple containing (waveform, sample_rate).
+        audio (tuple): (waveform, sample_rate).
 
     Returns:
         tuple: Normalized waveform and sample rate.
     """
     waveform, sample_rate = audio
     waveform = waveform.squeeze().numpy()
-    rms = np.sqrt(np.mean(waveform ** 2))
+    rms = np.sqrt(np.mean(waveform**2))
     target_rms = 10 ** (-20 / 20)
     if rms > 0:
         waveform *= target_rms / rms
     return waveform, sample_rate
 
-def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_id="large"):
+def extract_timestamps(timestamps, waveform, cache_dir, samplerate=16000, model_id="waveletdeboshir/whisper-large-v3-no-numbers"):
     """
-    Extract precise timestamps from non-silent audio segments using whisperx.
+    Extract precise timestamps from non-silent audio segments.
 
     Args:
-        timestamps (list): List of detected (start, end) time tuples for non-silent segments.
+        timestamps (list): List of detected timestamps.
         waveform (np.ndarray): Normalized audio waveform.
-        cache_dir (str): Cache directory (not used in whisperx, kept for compatibility).
+        cache_dir (str): Model cache directory.
         samplerate (int): Sample rate.
-        model_id (str): Whisper model identifier (e.g., "large", "medium", etc.).
+        model_id (str): Whisper model ID.
 
     Returns:
-        list: List of refined (start, end) timestamp tuples.
+        list: Refined timestamps.
     """
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = load_model(model_id, cache_dir)
+    pipe = load_model(model_id, cache_dir)
     refined_timestamps = []
 
-    for seg_start, seg_end in timestamps:
-        segment = waveform[int(seg_start * samplerate):int(seg_end * samplerate)]
-        # Transcribe the segment using whisperx
-        result = whisperx.transcribe(model, segment, batch_size=1, fp16=(device == "cuda"))
-        # Align the transcription result to improve timestamp accuracy
-        aligned_result = whisperx.align(result["segments"], segment, model, device)
-        for seg in aligned_result:
-            if seg.get("start") is not None and seg.get("end") is not None and seg["start"] < seg["end"]:
-                # Adjust timestamps relative to the entire waveform
-                refined_timestamps.append((seg_start + seg["start"], seg_start + seg["end"]))
+    for start, end in timestamps:
+        segment = waveform[int(start * samplerate):int(end * samplerate)]
+        savetime, temp_timestamps = 0, []
+
+        while len(segment) / samplerate >= 30 or savetime == 0:
+            chunk = segment[:30 * samplerate]
+            result = pipe(chunk, generate_kwargs={"num_beams": 1, "temperature": 0.0, "return_timestamps": True, "task": "transcribe"})
+            if not result['chunks']:
+                break
+
+            for i in result['chunks']:
+                if i['timestamp'] and i['timestamp'][0] is not None and i['timestamp'][1] is not None and i['timestamp'][0] < i['timestamp'][1] < 30:
+                    temp_timestamps.append((i['timestamp'][0] + savetime, i['timestamp'][1] + savetime))
+                    savetime = i['timestamp'][1]
+
+            segment = segment[int(savetime * samplerate):]
+
+        refined_timestamps += [(start + ts[0], start + ts[1]) for ts in temp_timestamps]
+
     return refined_timestamps
 
 def save_slices(info, wav_output_dir):
     """
-    Save sliced audio segments from the original audio file as WAV files.
+    Save sliced audio segments and corresponding transcriptions.
 
     Args:
-        info (list): List of tuples containing (audio file path, list of timestamps).
-        wav_output_dir (str): Directory where sliced WAV files will be saved.
+        info (list): List of tuples (audio file, timestamps, text).
+        wav_output_dir (str): Directory to save WAV files.
+        txt_output_dir (str): Directory to save transcription text.
     """
     for idx, (wavfile, timestamps) in enumerate(info):
         waveform, sample_rate = torchaudio.load(wavfile)
-        if waveform.shape[0] > 1:
-            waveform = waveform.mean(dim=0, keepdim=True)
+        waveform = waveform.mean(dim=0, keepdim=True) if waveform.shape[0] > 1 else waveform
+
         for (start, end) in timestamps:
             sliced_waveform = waveform[:, int(start * sample_rate):int(end * sample_rate)]
-            out_path = os.path.join(wav_output_dir, f"{str(idx).zfill(5)}.wav")
-            torchaudio.save(out_path, sliced_waveform, sample_rate)
+            torchaudio.save(os.path.join(wav_output_dir, f"{str(idx).zfill(5)}.wav"), sliced_waveform, sample_rate)
+
         os.remove(wavfile)
 
-def process_audio_files(input_folder, output_dir, cache_dir, model_id="large"):
+def process_audio_files(input_folder, output_dir, cache_dir, model_id):
     """
-    Process all MP3 files in the specified folder by detecting speech segments and saving sliced audio.
+    Process all audio files in a directory, detect speech, and save results.
 
     Args:
-        input_folder (str): Directory containing MP3 files.
-        output_dir (str): Directory where sliced WAV files will be saved.
-        cache_dir (str): Cache directory (not used in whisperx, kept for compatibility).
-        model_id (str): Whisper model identifier (e.g., "large", "medium", etc.).
+        input_folder (str): Folder containing MP3 files.
+        output_dirs (tuple): (WAV output folder, TXT output folder).
+        cache_dir (str): Model cache directory.
+        lang (str): Target transcription language.
     """
     info = []
     for wav_file in glob(os.path.join(input_folder, "*.mp3")):
         audio = torchaudio.load(wav_file)
-        normalized_audio, sample_rate = audio_normalize(audio)
-        timestamps = detect_non_silent(normalized_audio, sr=sample_rate)
-        timestamps = extract_timestamps(timestamps, normalized_audio, cache_dir, samplerate=sample_rate, model_id=model_id)
+        normalized_audio, _ = audio_normalize(audio)
+
+        timestamps = detect_non_silent(normalized_audio)
+        timestamps = extract_timestamps(timestamps, normalized_audio, cache_dir, model_id=model_id)
+
         info.append((wav_file, timestamps))
+
     save_slices(info, output_dir)
