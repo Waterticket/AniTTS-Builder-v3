@@ -135,8 +135,9 @@ def save_slices(info, wav_output_dir):
     """
     Save sliced audio segments and corresponding transcriptions.
     """
+    idx = 0
     print("[INFO] Saving sliced audio segments.")
-    for idx, (wavfile, timestamps) in enumerate(info):
+    for (wavfile, timestamps) in info:
         print(f"[INFO] Saving slices for file: {wavfile}")
         waveform, sample_rate = torchaudio.load(wavfile)
         waveform = waveform.mean(dim=0, keepdim=True) if waveform.shape[0] > 1 else waveform
@@ -145,6 +146,7 @@ def save_slices(info, wav_output_dir):
             sliced_waveform = waveform[:, int(start * sample_rate):int(end * sample_rate)]
             output_path = os.path.join(wav_output_dir, f"{str(idx).zfill(5)}.wav")
             torchaudio.save(output_path, sliced_waveform, sample_rate)
+            idx+=1
             print(f"[INFO] Saved slice to {output_path}.")
 
         os.remove(wavfile)
