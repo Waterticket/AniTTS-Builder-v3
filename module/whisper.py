@@ -150,7 +150,12 @@ def save_slices(info, wav_output_dir):
             print(f"[INFO] Saved slice to {output_path}.")
 
         os.remove(wavfile)
+        parts = os.path.normpath(wavfile).split(os.sep)
+        parts[-2] = "audio_wav"
+        parts[-1] = parts[-1][:-3]+"wav"
+        os.remove(os.path.join(*parts))
         print(f"[INFO] Removed original file: {wavfile}.")
+        print(f"[INFO] Removed original file: {os.path.join(*parts)}.")
     print("[INFO] All slices saved.")
 
 def process_audio_files(input_folder, output_dir, cache_dir, model_id):

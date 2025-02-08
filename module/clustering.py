@@ -21,6 +21,7 @@ def compute_embeddings_and_distance(
 ):
     """
     Load WAV files, compute embeddings using ReDimNet, and return a cosine distance matrix.
+    Files that fail to load or whose duration is out of the specified range are completely excluded.
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"[INFO] Using device: {device}.")
@@ -53,40 +54,53 @@ def compute_embeddings_and_distance(
         return None, [], [], None
 
     def extract_embedding(filepath):
-        # Load audio with librosa to determine duration
-        audio_librosa, sr_librosa = librosa.load(filepath, sr=16000)
-        duration_sec = len(audio_librosa) / sr_librosa
+        """
+        Load audio, compute its duration using librosa, process the audio with torchaudio,
+        and compute the embedding using ReDimNet.
+        If any error occurs during loading or processing, return (None, None) to exclude the file.
+        """
+        try:
+            # Load audio with librosa to determine duration
+            audio_librosa, sr_librosa = librosa.load(filepath, sr=16000)
+            duration_sec = len(audio_librosa) / sr_librosa
 
-        # Load audio with torchaudio for processing
-        signal, sr = torchaudio.load(filepath)
-        if sr != 16000:
-            resampler = torchaudio.transforms.Resample(orig_freq=sr, new_freq=16000)
-            signal = resampler(signal)
+            # Load audio with torchaudio for processing
+            signal, sr = torchaudio.load(filepath)
+            if sr != 16000:
+                resampler = torchaudio.transforms.Resample(orig_freq=sr, new_freq=16000)
+                signal = resampler(signal)
 
-        max_samples = int(max_audio_length * 16000)
-        if signal.shape[1] > max_samples:
-            signal = signal[:, :max_samples]
+            max_samples = int(max_audio_length * 16000)
+            if signal.shape[1] > max_samples:
+                signal = signal[:, :max_samples]
 
-        if use_half:
-            model.half()
+            if use_half:
+                model.half()
 
-        signal = signal.to(device)
-        with torch.no_grad():
-            emb = model(signal)  # Shape: (1, emb_dim)
-        emb = emb.squeeze(0).cpu()  # Shape: (emb_dim,)
-        return emb, duration_sec
+            signal = signal.to(device)
+            with torch.no_grad():
+                emb = model(signal)  # Shape: (1, emb_dim)
+            emb = emb.squeeze(0).cpu()  # Shape: (emb_dim,)
+            return emb, duration_sec
+        except Exception as e:
+            print(f"[ERROR] Failed to process file {filepath} with error: {e}")
+            return None, None
 
     valid_embeddings = []
     valid_wav_files = []
+    # noise_files list is maintained for backward compatibility,
+    # but files failing to load or out of range are now excluded (not added here)
     noise_files = []
 
     # Process files and compute embeddings
     for path in all_wav_files:
         print(f"[INFO] Processing file: {path}.")
         emb, duration_sec = extract_embedding(path)
+        if emb is None or duration_sec is None:
+            print(f"[INFO] File {path} failed to load; excluding from further processing.")
+            continue
         if duration_sec < min_duration or duration_sec > max_duration:
-            print(f"[INFO] File {path} duration {duration_sec:.2f}s out of range; classifying as noise.")
-            noise_files.append(path)
+            print(f"[INFO] File {path} duration {duration_sec:.2f}s out of range; excluding from further processing.")
             continue
         valid_embeddings.append(emb)
         valid_wav_files.append(path)
@@ -94,7 +108,7 @@ def compute_embeddings_and_distance(
 
     # Exit if no valid embeddings were found
     if len(valid_embeddings) == 0:
-        print("[WARN] All files were out of the specified duration range.")
+        print("[WARN] No valid audio files found after filtering.")
         return None, [], noise_files, None
 
     embeddings = torch.stack(valid_embeddings, dim=0)  # Shape: (N, D), float32
@@ -293,6 +307,7 @@ def finalize_clustering(labels, valid_wav_files, noise_files, destination_folder
     """
     Create cluster folders and copy WAV files based on the clustering labels.
     """
+    # noise_files is expected to be empty if files failing to load were excluded.
     labels_total = list(labels) + ([-1] * len(noise_files))
     all_files = valid_wav_files + noise_files
 
