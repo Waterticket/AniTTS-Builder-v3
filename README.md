@@ -24,6 +24,18 @@ This program is developed to run through dockers. Please install CUDA 12.1 + CUD
 4. Run the start.bat file and please enter the project name consisting of English and numbers only.
 
 5. When the docker container is up, type: "python main.py"
+
+### For Linux/Unix systems
+
+1. Same as Installation
+
+2. Same as Installation
+
+3. Run the `run.sh` file. Enter the project name to `<data_folder_name>` parameter consisting of English and numbers only.
+
+```sh
+./run.sh <data_folder_name>
+```
    
 ## Usage
 
